@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_location" z="RvMgx8apsPylYygCQ4tMBVfulVw=">
+            <menu:item id="i_location_new" messageCode="global_menu_new" url="/locations?form" z="sW8KSnwNnd9wjssI0lLV1kzOguk="/>
+            <menu:item id="i_location_list" messageCode="global_menu_list" url="/locations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VdKLEljpeTLil2W6A3GdWmSBzXI="/>
+        </menu:category>
+        <menu:category id="c_span" z="mSZihVRuhFi7onPHhwNL0HDW3/A=">
+            <menu:item id="i_span_new" messageCode="global_menu_new" url="/spans?form" z="96g7XY3Et8SSmEziUTTgshv7MQ8="/>
+            <menu:item id="i_span_list" messageCode="global_menu_list" url="/spans?page=1&amp;size=${empty param.size ? 10 : param.size}" z="U9KDhzFqfISf0AxizqzXHYmkIEw="/>
+        </menu:category>
+        <menu:category id="c_text" z="P3M85zdwRzxnI2lFzrd68r3sITY=">
+            <menu:item id="i_text_new" messageCode="global_menu_new" url="/texts?form" z="ry1D4rln9dV/Ul+5Xe27Dwhb418="/>
+            <menu:item id="i_text_list" messageCode="global_menu_list" url="/texts?page=1&amp;size=${empty param.size ? 10 : param.size}" z="dpj0vTnjoSrCnDcT4Ivgj6Nppx4="/>
+        </menu:category>
+        <menu:category id="c_region" z="c6fLb1dSC6E3lOpc6tTzfRXdsVo=">
+            <menu:item id="i_region_new" messageCode="global_menu_new" url="/regions?form" z="zcyY7k/YcUshfD7FTv/o/904YhM="/>
+            <menu:item id="i_region_list" messageCode="global_menu_list" url="/regions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="R4yrjjgk2KXYIlMw++M9nLkYTpE="/>
+        </menu:category>
+        <menu:category id="c_business" z="3/VDXzhDjzFLUzdoL2Wg0S7bUMk=">
+            <menu:item id="i_business_new" messageCode="global_menu_new" url="/businesses?form" z="5p0cLS8PCK+/fwVHwTtVWPNEI94="/>
+            <menu:item id="i_business_list" messageCode="global_menu_list" url="/businesses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="mJrfuDzhEQHIrcNjPZppY9JaCc8="/>
+        </menu:category>
+        <menu:category id="c_yelpsearchresult" z="wsR5eooSZGZAAllfWoSAwaJyk78=">
+            <menu:item id="i_yelpsearchresult_new" messageCode="global_menu_new" url="/yelpsearchresults?form" z="akptXNE9ze5rIS4BZVVAdIw2uyE="/>
+            <menu:item id="i_yelpsearchresult_list" messageCode="global_menu_list" url="/yelpsearchresults?page=1&amp;size=${empty param.size ? 10 : param.size}" z="b8Zg9VKx/nWaW+kax90SZnmgblg="/>
+        </menu:category>
+        <menu:category id="c_coordinate" z="B1ncpSbthUvfNkVFLby18efTZs8=">
+            <menu:item id="i_coordinate_new" messageCode="global_menu_new" url="/coordinates?form" z="iEJ7vyKntokgbFZwoQjZG2K+Z/w="/>
+            <menu:item id="i_coordinate_list" messageCode="global_menu_list" url="/coordinates?page=1&amp;size=${empty param.size ? 10 : param.size}" z="wKhyNsZSYEcTjes4v1tCIIFqivA="/>
+        </menu:category>
+        <menu:category id="c_stringlist" z="2yPMdZiEF72zMlPpFQCQXprGmKE=">
+            <menu:item id="i_stringlist_new" messageCode="global_menu_new" url="/stringlists?form" z="jBcLi6W/ljXu1Odhv6kI+Z7041E="/>
+            <menu:item id="i_stringlist_list" messageCode="global_menu_list" url="/stringlists?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Fa5/hI+Ju+Jr80moMw2dE0w2p1s="/>
+        </menu:category>
+    </menu:menu>
+</div>

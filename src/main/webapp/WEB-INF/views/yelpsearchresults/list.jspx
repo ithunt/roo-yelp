@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_iansails_yelp_model_yelp_YelpSearchResult" items="${yelpsearchresults}" z="qKssUg+2dn8IlojS2PH7TNZhYjw=">
+        <table:table data="${yelpsearchresults}" id="l_com_iansails_yelp_model_yelp_YelpSearchResult" path="/yelpsearchresults" z="e03uCM8JUmuDuBWX2bvgY9RnDJ0=">
+            <table:column id="c_com_iansails_yelp_model_yelp_YelpSearchResult_region" property="region" z="s0IXvDXOpYgHUyatqif1dZt1uGo="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_YelpSearchResult_total" property="total" z="bxQk3IFoFQ3LSSOwVkrCBC1rHKE="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_YelpSearchResult_businesses" property="businesses" z="6tCrp/QwhVztOxihOPlViAHZFno="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_YelpSearchResult_categories" property="categories" z="0JjWFU4UpN68SzNUXKIMKve/eCw="/>
+        </table:table>
+    </page:list>
+</div>

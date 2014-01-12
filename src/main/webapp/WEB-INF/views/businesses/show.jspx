@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_iansails_yelp_model_yelp_Business" object="${business}" path="/businesses" z="bo1YR6CktBtbc+rATflAbCn8eWE=">
+        <field:display field="name" id="s_com_iansails_yelp_model_yelp_Business_name" object="${business}" z="u4RaCt8QnUWj0jtdLHri01+OnnY="/>
+        <field:display field="imageUrl" id="s_com_iansails_yelp_model_yelp_Business_imageUrl" object="${business}" z="AMZ3crfoPOBL4IpAI6s3gYBBzww="/>
+        <field:display field="url" id="s_com_iansails_yelp_model_yelp_Business_url" object="${business}" z="DWdDn4zPsgaZVA5nk4BEghXI5f8="/>
+        <field:display field="mobileUrl" id="s_com_iansails_yelp_model_yelp_Business_mobileUrl" object="${business}" z="xSj5iy4DN95TNeQG3W4GnxXaBCg="/>
+        <field:display field="phone" id="s_com_iansails_yelp_model_yelp_Business_phone" object="${business}" z="Jg/Q8SWMKrKuzYFNO7fkIfUCy30="/>
+        <field:display field="displayPhone" id="s_com_iansails_yelp_model_yelp_Business_displayPhone" object="${business}" z="6XOt7M5BoJrVxQhapSRP5S+EdHc="/>
+        <field:display field="ratingImgUrl" id="s_com_iansails_yelp_model_yelp_Business_ratingImgUrl" object="${business}" z="bjjDgJeuW8HG03KE7gqYUk5FT5w="/>
+        <field:display field="ratingImgUrlSmall" id="s_com_iansails_yelp_model_yelp_Business_ratingImgUrlSmall" object="${business}" z="VV3uMlBbsr47UHfkwBWb+klF7u0="/>
+        <field:display field="snippetText" id="s_com_iansails_yelp_model_yelp_Business_snippetText" object="${business}" z="3rbwRiUoJ6ARnF9yj35Z8Yyw0Ss="/>
+        <field:display field="snippetImgUrl" id="s_com_iansails_yelp_model_yelp_Business_snippetImgUrl" object="${business}" z="mRSW7WM3VGrypuQUATKAcdaGllg="/>
+        <field:display field="reviewCount" id="s_com_iansails_yelp_model_yelp_Business_reviewCount" object="${business}" z="86Qpk9SzORblpmANQiYCkLNCuTg="/>
+        <field:display field="distance" id="s_com_iansails_yelp_model_yelp_Business_distance" object="${business}" z="+o4TsVk2ze+S8oOBgbTufbqhGBs="/>
+        <field:display field="location" id="s_com_iansails_yelp_model_yelp_Business_location" object="${business}" z="9e5C5nQFqH/3LtahnP3Ax1IGD8o="/>
+        <field:display field="categories" id="s_com_iansails_yelp_model_yelp_Business_categories" object="${business}" z="NH6JsW9lW6n6u/dyEl/JS1X1NbY="/>
+        <field:display field="id" id="s_com_iansails_yelp_model_yelp_Business_id" object="${business}" z="ivF02U9hbul/945VqYc/D+DjGf4="/>
+    </page:show>
+</div>

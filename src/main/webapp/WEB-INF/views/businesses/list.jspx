@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_iansails_yelp_model_yelp_Business" items="${businesses}" z="lAnc4LC/7/GUQQKWt4ZrHQeIz+E=">
+        <table:table data="${businesses}" id="l_com_iansails_yelp_model_yelp_Business" path="/businesses" typeIdFieldName="id_" z="NKtkBxxfYA+z5fN4elyiloBkbhI=">
+            <table:column id="c_com_iansails_yelp_model_yelp_Business_name" property="name" z="skU+4mgs2+NiH7yRIQTIOHIBcU4="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Business_imageUrl" property="imageUrl" z="slKOueTrfkDLmQuWYy859vTKdtk="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Business_url" property="url" z="dejRphEGpecWQ0jgY8OPNVI8Jio="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Business_mobileUrl" property="mobileUrl" z="wo3hfyzKDqOFOUVbwsBA0Kz6pbU="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Business_phone" property="phone" z="smzdQ8jO6VjuGp6qTdR4bwNf5sA="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Business_displayPhone" property="displayPhone" z="yLGVup23Udgs/VtcriltELLAqCE="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_iansails_yelp_model_Region" items="${regions}" z="dA3Z6gSzU9filE4t+GmVIYF5kWo=">
+        <table:table data="${regions}" id="l_com_iansails_yelp_model_Region" path="/regions" z="1iMQ1nx4trhpMinkP/Ocm1bLV60=">
+            <table:column id="c_com_iansails_yelp_model_Region_span" property="span" z="4PVU4qtowhNU4wshPgup+Mvc880="/>
+            <table:column id="c_com_iansails_yelp_model_Region_center" property="center" z="NJjrv4ajs2YViqB0VWrTVcP/HRQ="/>
+        </table:table>
+    </page:list>
+</div>

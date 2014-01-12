@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_iansails_yelp_model_yelp_YelpSearchResult" object="${yelpsearchresult}" path="/yelpsearchresults" z="H8gusSS8j2ig8VEVkPftaBR0HWs=">
+        <field:display field="region" id="s_com_iansails_yelp_model_yelp_YelpSearchResult_region" object="${yelpsearchresult}" z="wTTYjaOzxO4dvyiNzQoDlFBiEEw="/>
+        <field:display field="total" id="s_com_iansails_yelp_model_yelp_YelpSearchResult_total" object="${yelpsearchresult}" z="uaMVnoDTn3a8fYhf/pIkCsMnNFU="/>
+        <field:display field="businesses" id="s_com_iansails_yelp_model_yelp_YelpSearchResult_businesses" object="${yelpsearchresult}" z="ldj6/hI6Js2rxlDE6SuO1J8Tkv0="/>
+        <field:display field="categories" id="s_com_iansails_yelp_model_yelp_YelpSearchResult_categories" object="${yelpsearchresult}" z="+PLcdqrVfsAsyw+zGidXAD/VH5E="/>
+    </page:show>
+</div>

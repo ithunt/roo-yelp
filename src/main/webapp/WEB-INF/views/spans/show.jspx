@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_iansails_yelp_model_Span" object="${span}" path="/spans" z="zu2/W0FWF5ta4v0Wn2M9RS6dlpE=">
+        <field:display field="latitudeDelta" id="s_com_iansails_yelp_model_Span_latitudeDelta" object="${span}" z="OjPnrf48Ia184cpvIIVTt1aYvYY="/>
+        <field:display field="longitudeDelta" id="s_com_iansails_yelp_model_Span_longitudeDelta" object="${span}" z="Mldpw8G19tUTPMYrTG+2+/+KMuI="/>
+    </page:show>
+</div>

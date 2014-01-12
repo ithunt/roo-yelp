@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_iansails_yelp_model_Coordinate" modelAttribute="coordinate" path="/coordinates" versionField="Version" z="81Vr84kKg1gZZlbUD2P52oVsyQI=">
+        <field:input field="latitude" id="c_com_iansails_yelp_model_Coordinate_latitude" z="PbwfEHguynJlaFJfszrhi2WuiFQ="/>
+        <field:input field="longitude" id="c_com_iansails_yelp_model_Coordinate_longitude" z="qyPV9+k7bjlsjLROSI16mc+aupk="/>
+    </form:update>
+</div>

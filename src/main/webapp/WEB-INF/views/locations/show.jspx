@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_iansails_yelp_model_yelp_Location" object="${location}" path="/locations" z="Ex38VEd7TS8ic5iPerVXF4gA2e4=">
+        <field:display field="coordinate" id="s_com_iansails_yelp_model_yelp_Location_coordinate" object="${location}" z="QhP6PikXW5agVBFjyFZQTTdZRCM="/>
+        <field:display field="city" id="s_com_iansails_yelp_model_yelp_Location_city" object="${location}" z="dm9Y2X4yP5+wk0xtksmO4wspxUQ="/>
+        <field:display field="stateCode" id="s_com_iansails_yelp_model_yelp_Location_stateCode" object="${location}" z="OCXpr9ySnBuTBoaQmsbIvcEnuLY="/>
+        <field:display field="postalCode" id="s_com_iansails_yelp_model_yelp_Location_postalCode" object="${location}" z="IQWfLSJ7/aJ14WUlqLAicdf1x8Q="/>
+        <field:display field="countryCode" id="s_com_iansails_yelp_model_yelp_Location_countryCode" object="${location}" z="6+GEFLtvUBNlvPw/k2imczQXyFA="/>
+        <field:display field="crossStreets" id="s_com_iansails_yelp_model_yelp_Location_crossStreets" object="${location}" z="FYL0jN5u0XYlpB3fBIsMQZl8tpY="/>
+        <field:display field="neighborhoods" id="s_com_iansails_yelp_model_yelp_Location_neighborhoods" object="${location}" z="YY0R+8X/9D7/xbBQn17bbYDxRzE="/>
+        <field:display field="geoAccuracy" id="s_com_iansails_yelp_model_yelp_Location_geoAccuracy" object="${location}" z="s2A6x2He2s02SzR38WgMfHziSgk="/>
+        <field:display field="displayAddress" id="s_com_iansails_yelp_model_yelp_Location_displayAddress" object="${location}" z="U4C93kwU+lX59Tq8lmwNwsbcLi8="/>
+        <field:display field="address" id="s_com_iansails_yelp_model_yelp_Location_address" object="${location}" z="j4AOQZ3RyTlnKbA1+oKgo/CczFw="/>
+    </page:show>
+</div>

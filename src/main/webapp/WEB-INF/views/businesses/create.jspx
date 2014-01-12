@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_iansails_yelp_model_yelp_Business" modelAttribute="business" path="/businesses" render="${empty dependencies}" z="dTRcS02+f1/tavyLGQ3L/rwLru8=">
+        <field:input field="name" id="c_com_iansails_yelp_model_yelp_Business_name" z="Jm035Kms8/jOmdQcjKOCxcOleuM="/>
+        <field:input field="imageUrl" id="c_com_iansails_yelp_model_yelp_Business_imageUrl" z="JVOFOaNBe7iAINxoT+vglrPCYiA="/>
+        <field:input field="url" id="c_com_iansails_yelp_model_yelp_Business_url" z="6suP0H4gZs0/dj/vphCGJ9OQ2Tw="/>
+        <field:input field="mobileUrl" id="c_com_iansails_yelp_model_yelp_Business_mobileUrl" z="JoZPYzuOdM+PRpeVw/Smww/MSxE="/>
+        <field:input field="phone" id="c_com_iansails_yelp_model_yelp_Business_phone" z="ybpyfueIQDM924x03l/4la0Rxgk="/>
+        <field:input field="displayPhone" id="c_com_iansails_yelp_model_yelp_Business_displayPhone" z="aTbeqGZyeCYzCDtrcY+n5TCYlDk="/>
+        <field:input field="ratingImgUrl" id="c_com_iansails_yelp_model_yelp_Business_ratingImgUrl" z="xc4OeUQHU5M9c3o+fvm5EpX7PXM="/>
+        <field:input field="ratingImgUrlSmall" id="c_com_iansails_yelp_model_yelp_Business_ratingImgUrlSmall" z="5ALTDlQf7dgL/orTtaT7Jx/3ds0="/>
+        <field:input field="snippetText" id="c_com_iansails_yelp_model_yelp_Business_snippetText" z="KNAYMmitYYc2sLm5JwKZhXyRtZc="/>
+        <field:input field="snippetImgUrl" id="c_com_iansails_yelp_model_yelp_Business_snippetImgUrl" z="QwxjIV+IUs9YopfD0diwljnFpv0="/>
+        <field:input field="reviewCount" id="c_com_iansails_yelp_model_yelp_Business_reviewCount" z="MsodCMAdxlYryIrmKmcz8GJv1QQ="/>
+        <field:input field="distance" id="c_com_iansails_yelp_model_yelp_Business_distance" z="3VecmipYkEs9K/6Stxxk/xDnom0="/>
+        <field:input field="location" id="c_com_iansails_yelp_model_yelp_Business_location" z="jEmsNi9BYNpKmc6ecTzWOzwomgg="/>
+        <field:input field="categories" id="c_com_iansails_yelp_model_yelp_Business_categories" z="xspjoViGO65Ok3vuTJdrCjDkEM8="/>
+        <field:input field="id" id="c_com_iansails_yelp_model_yelp_Business_id" z="jCMBgsdrivR3c00im25ca7PjlNE="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_iansails_yelp_model_yelp_Business" render="${not empty dependencies}" z="D2nQqu+2Bm7Sd0o1ZnmUdX6qXtg="/>
+</div>

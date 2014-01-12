@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_iansails_yelp_model_yelp_Location" items="${locations}" z="luDIhPdBCquM5v9sXUxbk0VrIP0=">
+        <table:table data="${locations}" id="l_com_iansails_yelp_model_yelp_Location" path="/locations" z="ZHhb9ScZcC5s/kZKW2OfIfUK+Ko=">
+            <table:column id="c_com_iansails_yelp_model_yelp_Location_coordinate" property="coordinate" z="cAkqvrGu7s4mPA6V8RKsw6/1WFc="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Location_city" property="city" z="sf3Zo9TfU3Qp5BLkNOzjRjZMIY0="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Location_stateCode" property="stateCode" z="OykdrdmsSUIg08tVGqsaTck3e2E="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Location_postalCode" property="postalCode" z="z76vu4NW5vOgm4JFjilHylSqUNA="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Location_countryCode" property="countryCode" z="KPUHttw812SeSbMmb75g2McIoyQ="/>
+            <table:column id="c_com_iansails_yelp_model_yelp_Location_crossStreets" property="crossStreets" z="orPD6eP5LU1JnDK+fJu1oZhe004="/>
+        </table:table>
+    </page:list>
+</div>
