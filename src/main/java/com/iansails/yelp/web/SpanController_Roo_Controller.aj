@@ -4,10 +4,12 @@
 package com.iansails.yelp.web;
 
 import com.iansails.yelp.model.Span;
+import com.iansails.yelp.service.SpanService;
 import com.iansails.yelp.web.SpanController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect SpanController_Roo_Controller {
     
+    @Autowired
+    SpanService SpanController.spanService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String SpanController.create(@Valid Span span, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -26,7 +31,7 @@ privileged aspect SpanController_Roo_Controller {
             return "spans/create";
         }
         uiModel.asMap().clear();
-        span.persist();
+        spanService.saveSpan(span);
         return "redirect:/spans/" + encodeUrlPathSegment(span.getId().toString(), httpServletRequest);
     }
     
@@ -38,21 +43,21 @@ privileged aspect SpanController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String SpanController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("span", Span.findSpan(id));
+        uiModel.addAttribute("span", spanService.findSpan(id));
         uiModel.addAttribute("itemId", id);
         return "spans/show";
     }
     
     @RequestMapping(produces = "text/html")
-    public String SpanController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String SpanController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("spans", Span.findSpanEntries(firstResult, sizeNo));
-            float nrOfPages = (float) Span.countSpans() / sizeNo;
+            uiModel.addAttribute("spans", Span.findSpanEntries(firstResult, sizeNo, sortFieldName, sortOrder));
+            float nrOfPages = (float) spanService.countAllSpans() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("spans", Span.findAllSpans());
+            uiModel.addAttribute("spans", Span.findAllSpans(sortFieldName, sortOrder));
         }
         return "spans/list";
     }
@@ -64,20 +69,20 @@ privileged aspect SpanController_Roo_Controller {
             return "spans/update";
         }
         uiModel.asMap().clear();
-        span.merge();
+        spanService.updateSpan(span);
         return "redirect:/spans/" + encodeUrlPathSegment(span.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String SpanController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Span.findSpan(id));
+        populateEditForm(uiModel, spanService.findSpan(id));
         return "spans/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String SpanController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Span span = Span.findSpan(id);
-        span.remove();
+        Span span = spanService.findSpan(id);
+        spanService.deleteSpan(span);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

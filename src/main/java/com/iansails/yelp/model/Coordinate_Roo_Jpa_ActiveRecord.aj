@@ -14,6 +14,8 @@ privileged aspect Coordinate_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager Coordinate.entityManager;
     
+    public static final List<String> Coordinate.fieldNames4OrderClauseFilter = java.util.Arrays.asList("latitude", "longitude");
+    
     public static final EntityManager Coordinate.entityManager() {
         EntityManager em = new Coordinate().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
@@ -28,6 +30,17 @@ privileged aspect Coordinate_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM Coordinate o", Coordinate.class).getResultList();
     }
     
+    public static List<Coordinate> Coordinate.findAllCoordinates(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Coordinate o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Coordinate.class).getResultList();
+    }
+    
     public static Coordinate Coordinate.findCoordinate(Long id) {
         if (id == null) return null;
         return entityManager().find(Coordinate.class, id);
@@ -35,6 +48,17 @@ privileged aspect Coordinate_Roo_Jpa_ActiveRecord {
     
     public static List<Coordinate> Coordinate.findCoordinateEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("SELECT o FROM Coordinate o", Coordinate.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+    
+    public static List<Coordinate> Coordinate.findCoordinateEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Coordinate o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Coordinate.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional

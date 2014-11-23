@@ -14,6 +14,8 @@ privileged aspect StringList_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager StringList.entityManager;
     
+    public static final List<String> StringList.fieldNames4OrderClauseFilter = java.util.Arrays.asList("strings");
+    
     public static final EntityManager StringList.entityManager() {
         EntityManager em = new StringList().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
@@ -28,6 +30,17 @@ privileged aspect StringList_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM StringList o", StringList.class).getResultList();
     }
     
+    public static List<StringList> StringList.findAllStringLists(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM StringList o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, StringList.class).getResultList();
+    }
+    
     public static StringList StringList.findStringList(Long id) {
         if (id == null) return null;
         return entityManager().find(StringList.class, id);
@@ -35,6 +48,17 @@ privileged aspect StringList_Roo_Jpa_ActiveRecord {
     
     public static List<StringList> StringList.findStringListEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("SELECT o FROM StringList o", StringList.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+    
+    public static List<StringList> StringList.findStringListEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM StringList o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, StringList.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional

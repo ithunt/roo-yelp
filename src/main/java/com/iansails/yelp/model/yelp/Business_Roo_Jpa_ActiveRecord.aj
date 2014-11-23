@@ -14,6 +14,8 @@ privileged aspect Business_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager Business.entityManager;
     
+    public static final List<String> Business.fieldNames4OrderClauseFilter = java.util.Arrays.asList("name", "imageUrl", "url", "mobileUrl", "phone", "displayPhone", "ratingImgUrl", "ratingImgUrlSmall", "snippetText", "snippetImgUrl", "reviewCount", "distance", "categories", "location", "id");
+    
     public static final EntityManager Business.entityManager() {
         EntityManager em = new Business().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
@@ -28,6 +30,17 @@ privileged aspect Business_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM Business o", Business.class).getResultList();
     }
     
+    public static List<Business> Business.findAllBusinesses(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Business o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Business.class).getResultList();
+    }
+    
     public static Business Business.findBusiness(Long id_) {
         if (id_ == null) return null;
         return entityManager().find(Business.class, id_);
@@ -35,6 +48,17 @@ privileged aspect Business_Roo_Jpa_ActiveRecord {
     
     public static List<Business> Business.findBusinessEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("SELECT o FROM Business o", Business.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+    
+    public static List<Business> Business.findBusinessEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Business o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Business.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional

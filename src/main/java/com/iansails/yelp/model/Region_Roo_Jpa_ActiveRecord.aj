@@ -14,6 +14,8 @@ privileged aspect Region_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager Region.entityManager;
     
+    public static final List<String> Region.fieldNames4OrderClauseFilter = java.util.Arrays.asList("span", "center");
+    
     public static final EntityManager Region.entityManager() {
         EntityManager em = new Region().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
@@ -28,6 +30,17 @@ privileged aspect Region_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM Region o", Region.class).getResultList();
     }
     
+    public static List<Region> Region.findAllRegions(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Region o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Region.class).getResultList();
+    }
+    
     public static Region Region.findRegion(Long id) {
         if (id == null) return null;
         return entityManager().find(Region.class, id);
@@ -35,6 +48,17 @@ privileged aspect Region_Roo_Jpa_ActiveRecord {
     
     public static List<Region> Region.findRegionEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("SELECT o FROM Region o", Region.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+    
+    public static List<Region> Region.findRegionEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Region o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Region.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional

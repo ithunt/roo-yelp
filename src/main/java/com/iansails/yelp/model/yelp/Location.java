@@ -53,7 +53,7 @@ public class Location implements JsonDeserializer<Location>{
 
     /**
      */
-    private int geoAccuracy;
+    private double geoAccuracy;
 
     /**
      */
@@ -75,7 +75,7 @@ public class Location implements JsonDeserializer<Location>{
         location.postalCode = !jsonObject.has("postal_code") ? "" : jsonObject.get("postal_code").getAsString();
         location.countryCode = !jsonObject.has("country_code") ? "" : jsonObject.get("country_code").getAsString();
         location.crossStreets = !jsonObject.has("cross_streets") ? "" : jsonObject.get("cross_streets").getAsString();
-        location.geoAccuracy = !jsonObject.has("geo_accuracy") ? 0 : jsonObject.get("geo_accuracy").getAsInt();
+        location.geoAccuracy = !jsonObject.has("geo_accuracy") ? 0 : jsonObject.get("geo_accuracy").getAsDouble();
 
         Gson gson = new Gson();
         location.coordinate = gson.fromJson(jsonObject.get("location"), Coordinate.class);

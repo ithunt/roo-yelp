@@ -56,12 +56,8 @@ public class YelpSearchResultController {
         Response response = request.send();
         String rawData = response.getBody();
 
-
         Gson gson = new GsonBuilder().registerTypeAdapter(YelpSearchResult.class, new YelpSearchResult()).create();
         YelpSearchResult ysr = gson.fromJson(rawData, YelpSearchResult.class);
-
-
-
 
         yelpSearchResultService.saveYelpSearchResult(ysr);
 

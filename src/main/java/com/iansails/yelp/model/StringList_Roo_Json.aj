@@ -13,27 +13,33 @@ import java.util.List;
 privileged aspect StringList_Roo_Json {
     
     public String StringList.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
     }
     
     public String StringList.toJson(String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static StringList StringList.fromJsonToStringList(String json) {
-        return new JSONDeserializer<StringList>().use(null, StringList.class).deserialize(json);
+        return new JSONDeserializer<StringList>()
+        .use(null, StringList.class).deserialize(json);
     }
     
     public static String StringList.toJsonArray(Collection<StringList> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
     }
     
     public static String StringList.toJsonArray(Collection<StringList> collection, String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<StringList> StringList.fromJsonArrayToStringLists(String json) {
-        return new JSONDeserializer<List<StringList>>().use(null, ArrayList.class).use("values", StringList.class).deserialize(json);
+        return new JSONDeserializer<List<StringList>>()
+        .use("values", StringList.class).deserialize(json);
     }
     
 }

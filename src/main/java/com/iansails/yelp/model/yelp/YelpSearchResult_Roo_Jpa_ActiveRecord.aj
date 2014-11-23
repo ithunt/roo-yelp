@@ -14,6 +14,8 @@ privileged aspect YelpSearchResult_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager YelpSearchResult.entityManager;
     
+    public static final List<String> YelpSearchResult.fieldNames4OrderClauseFilter = java.util.Arrays.asList("region", "total", "businesses", "categories");
+    
     public static final EntityManager YelpSearchResult.entityManager() {
         EntityManager em = new YelpSearchResult().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
@@ -28,6 +30,17 @@ privileged aspect YelpSearchResult_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM YelpSearchResult o", YelpSearchResult.class).getResultList();
     }
     
+    public static List<YelpSearchResult> YelpSearchResult.findAllYelpSearchResults(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM YelpSearchResult o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, YelpSearchResult.class).getResultList();
+    }
+    
     public static YelpSearchResult YelpSearchResult.findYelpSearchResult(Long id) {
         if (id == null) return null;
         return entityManager().find(YelpSearchResult.class, id);
@@ -35,6 +48,17 @@ privileged aspect YelpSearchResult_Roo_Jpa_ActiveRecord {
     
     public static List<YelpSearchResult> YelpSearchResult.findYelpSearchResultEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("SELECT o FROM YelpSearchResult o", YelpSearchResult.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+    
+    public static List<YelpSearchResult> YelpSearchResult.findYelpSearchResultEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM YelpSearchResult o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, YelpSearchResult.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional

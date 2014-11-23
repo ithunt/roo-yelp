@@ -14,6 +14,8 @@ privileged aspect Span_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager Span.entityManager;
     
+    public static final List<String> Span.fieldNames4OrderClauseFilter = java.util.Arrays.asList("latitudeDelta", "longitudeDelta");
+    
     public static final EntityManager Span.entityManager() {
         EntityManager em = new Span().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
@@ -28,6 +30,17 @@ privileged aspect Span_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM Span o", Span.class).getResultList();
     }
     
+    public static List<Span> Span.findAllSpans(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Span o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Span.class).getResultList();
+    }
+    
     public static Span Span.findSpan(Long id) {
         if (id == null) return null;
         return entityManager().find(Span.class, id);
@@ -35,6 +48,17 @@ privileged aspect Span_Roo_Jpa_ActiveRecord {
     
     public static List<Span> Span.findSpanEntries(int firstResult, int maxResults) {
         return entityManager().createQuery("SELECT o FROM Span o", Span.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+    
+    public static List<Span> Span.findSpanEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Span o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, Span.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional

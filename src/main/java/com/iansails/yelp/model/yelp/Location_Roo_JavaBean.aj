@@ -65,11 +65,11 @@ privileged aspect Location_Roo_JavaBean {
         this.neighborhoods = neighborhoods;
     }
     
-    public int Location.getGeoAccuracy() {
+    public double Location.getGeoAccuracy() {
         return this.geoAccuracy;
     }
     
-    public void Location.setGeoAccuracy(int geoAccuracy) {
+    public void Location.setGeoAccuracy(double geoAccuracy) {
         this.geoAccuracy = geoAccuracy;
     }
     

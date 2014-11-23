@@ -53,15 +53,15 @@ privileged aspect BusinessController_Roo_Controller {
     }
     
     @RequestMapping(produces = "text/html")
-    public String BusinessController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String BusinessController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("businesses", businessService.findBusinessEntries(firstResult, sizeNo));
+            uiModel.addAttribute("businesses", Business.findBusinessEntries(firstResult, sizeNo, sortFieldName, sortOrder));
             float nrOfPages = (float) businessService.countAllBusinesses() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("businesses", businessService.findAllBusinesses());
+            uiModel.addAttribute("businesses", Business.findAllBusinesses(sortFieldName, sortOrder));
         }
         return "businesses/list";
     }

@@ -4,10 +4,12 @@
 package com.iansails.yelp.web;
 
 import com.iansails.yelp.model.Coordinate;
+import com.iansails.yelp.service.CoordinateService;
 import com.iansails.yelp.web.CoordinateController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect CoordinateController_Roo_Controller {
     
+    @Autowired
+    CoordinateService CoordinateController.coordinateService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String CoordinateController.create(@Valid Coordinate coordinate, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -26,7 +31,7 @@ privileged aspect CoordinateController_Roo_Controller {
             return "coordinates/create";
         }
         uiModel.asMap().clear();
-        coordinate.persist();
+        coordinateService.saveCoordinate(coordinate);
         return "redirect:/coordinates/" + encodeUrlPathSegment(coordinate.getId().toString(), httpServletRequest);
     }
     
@@ -38,21 +43,21 @@ privileged aspect CoordinateController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String CoordinateController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("coordinate", Coordinate.findCoordinate(id));
+        uiModel.addAttribute("coordinate", coordinateService.findCoordinate(id));
         uiModel.addAttribute("itemId", id);
         return "coordinates/show";
     }
     
     @RequestMapping(produces = "text/html")
-    public String CoordinateController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String CoordinateController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("coordinates", Coordinate.findCoordinateEntries(firstResult, sizeNo));
-            float nrOfPages = (float) Coordinate.countCoordinates() / sizeNo;
+            uiModel.addAttribute("coordinates", Coordinate.findCoordinateEntries(firstResult, sizeNo, sortFieldName, sortOrder));
+            float nrOfPages = (float) coordinateService.countAllCoordinates() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("coordinates", Coordinate.findAllCoordinates());
+            uiModel.addAttribute("coordinates", Coordinate.findAllCoordinates(sortFieldName, sortOrder));
         }
         return "coordinates/list";
     }
@@ -64,20 +69,20 @@ privileged aspect CoordinateController_Roo_Controller {
             return "coordinates/update";
         }
         uiModel.asMap().clear();
-        coordinate.merge();
+        coordinateService.updateCoordinate(coordinate);
         return "redirect:/coordinates/" + encodeUrlPathSegment(coordinate.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String CoordinateController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Coordinate.findCoordinate(id));
+        populateEditForm(uiModel, coordinateService.findCoordinate(id));
         return "coordinates/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String CoordinateController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Coordinate coordinate = Coordinate.findCoordinate(id);
-        coordinate.remove();
+        Coordinate coordinate = coordinateService.findCoordinate(id);
+        coordinateService.deleteCoordinate(coordinate);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

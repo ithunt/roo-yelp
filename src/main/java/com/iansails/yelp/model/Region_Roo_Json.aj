@@ -13,27 +13,33 @@ import java.util.List;
 privileged aspect Region_Roo_Json {
     
     public String Region.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
     }
     
     public String Region.toJson(String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static Region Region.fromJsonToRegion(String json) {
-        return new JSONDeserializer<Region>().use(null, Region.class).deserialize(json);
+        return new JSONDeserializer<Region>()
+        .use(null, Region.class).deserialize(json);
     }
     
     public static String Region.toJsonArray(Collection<Region> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
     }
     
     public static String Region.toJsonArray(Collection<Region> collection, String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<Region> Region.fromJsonArrayToRegions(String json) {
-        return new JSONDeserializer<List<Region>>().use(null, ArrayList.class).use("values", Region.class).deserialize(json);
+        return new JSONDeserializer<List<Region>>()
+        .use("values", Region.class).deserialize(json);
     }
     
 }

@@ -4,11 +4,13 @@
 package com.iansails.yelp.web;
 
 import com.iansails.yelp.model.StringList;
-import com.iansails.yelp.model.Text;
+import com.iansails.yelp.service.StringListService;
+import com.iansails.yelp.service.TextService;
 import com.iansails.yelp.web.StringListController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +22,12 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect StringListController_Roo_Controller {
     
+    @Autowired
+    StringListService StringListController.stringListService;
+    
+    @Autowired
+    TextService StringListController.textService;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String StringListController.create(@Valid StringList stringList, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -27,7 +35,7 @@ privileged aspect StringListController_Roo_Controller {
             return "stringlists/create";
         }
         uiModel.asMap().clear();
-        stringList.persist();
+        stringListService.saveStringList(stringList);
         return "redirect:/stringlists/" + encodeUrlPathSegment(stringList.getId().toString(), httpServletRequest);
     }
     
@@ -39,21 +47,21 @@ privileged aspect StringListController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String StringListController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("stringlist", StringList.findStringList(id));
+        uiModel.addAttribute("stringlist", stringListService.findStringList(id));
         uiModel.addAttribute("itemId", id);
         return "stringlists/show";
     }
     
     @RequestMapping(produces = "text/html")
-    public String StringListController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String StringListController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("stringlists", StringList.findStringListEntries(firstResult, sizeNo));
-            float nrOfPages = (float) StringList.countStringLists() / sizeNo;
+            uiModel.addAttribute("stringlists", StringList.findStringListEntries(firstResult, sizeNo, sortFieldName, sortOrder));
+            float nrOfPages = (float) stringListService.countAllStringLists() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("stringlists", StringList.findAllStringLists());
+            uiModel.addAttribute("stringlists", StringList.findAllStringLists(sortFieldName, sortOrder));
         }
         return "stringlists/list";
     }
@@ -65,20 +73,20 @@ privileged aspect StringListController_Roo_Controller {
             return "stringlists/update";
         }
         uiModel.asMap().clear();
-        stringList.merge();
+        stringListService.updateStringList(stringList);
         return "redirect:/stringlists/" + encodeUrlPathSegment(stringList.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String StringListController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, StringList.findStringList(id));
+        populateEditForm(uiModel, stringListService.findStringList(id));
         return "stringlists/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String StringListController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        StringList stringList = StringList.findStringList(id);
-        stringList.remove();
+        StringList stringList = stringListService.findStringList(id);
+        stringListService.deleteStringList(stringList);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
@@ -87,7 +95,7 @@ privileged aspect StringListController_Roo_Controller {
     
     void StringListController.populateEditForm(Model uiModel, StringList stringList) {
         uiModel.addAttribute("stringList", stringList);
-        uiModel.addAttribute("texts", Text.findAllTexts());
+        uiModel.addAttribute("texts", textService.findAllTexts());
     }
     
     String StringListController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

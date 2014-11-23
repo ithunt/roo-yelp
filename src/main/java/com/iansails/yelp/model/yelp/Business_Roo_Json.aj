@@ -13,27 +13,33 @@ import java.util.List;
 privileged aspect Business_Roo_Json {
     
     public String Business.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
     }
     
     public String Business.toJson(String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static Business Business.fromJsonToBusiness(String json) {
-        return new JSONDeserializer<Business>().use(null, Business.class).deserialize(json);
+        return new JSONDeserializer<Business>()
+        .use(null, Business.class).deserialize(json);
     }
     
     public static String Business.toJsonArray(Collection<Business> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
     }
     
     public static String Business.toJsonArray(Collection<Business> collection, String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<Business> Business.fromJsonArrayToBusinesses(String json) {
-        return new JSONDeserializer<List<Business>>().use(null, ArrayList.class).use("values", Business.class).deserialize(json);
+        return new JSONDeserializer<List<Business>>()
+        .use("values", Business.class).deserialize(json);
     }
     
 }

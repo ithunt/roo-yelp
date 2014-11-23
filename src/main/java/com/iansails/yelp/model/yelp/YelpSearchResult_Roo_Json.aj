@@ -13,27 +13,33 @@ import java.util.List;
 privileged aspect YelpSearchResult_Roo_Json {
     
     public String YelpSearchResult.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
     }
     
     public String YelpSearchResult.toJson(String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static YelpSearchResult YelpSearchResult.fromJsonToYelpSearchResult(String json) {
-        return new JSONDeserializer<YelpSearchResult>().use(null, YelpSearchResult.class).deserialize(json);
+        return new JSONDeserializer<YelpSearchResult>()
+        .use(null, YelpSearchResult.class).deserialize(json);
     }
     
     public static String YelpSearchResult.toJsonArray(Collection<YelpSearchResult> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
     }
     
     public static String YelpSearchResult.toJsonArray(Collection<YelpSearchResult> collection, String[] fields) {
-        return new JSONSerializer().include(fields).exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<YelpSearchResult> YelpSearchResult.fromJsonArrayToYelpSearchResults(String json) {
-        return new JSONDeserializer<List<YelpSearchResult>>().use(null, ArrayList.class).use("values", YelpSearchResult.class).deserialize(json);
+        return new JSONDeserializer<List<YelpSearchResult>>()
+        .use("values", YelpSearchResult.class).deserialize(json);
     }
     
 }
